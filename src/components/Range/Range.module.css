@@ -1,0 +1,39 @@
+.rangeContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.labelValue {
+  padding: 5px;
+}
+.slideRange {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  margin: 0 5px;
+}
+.slideTrack {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: rgba(170, 170, 170, 0.47);
+  border-radius: 10px;
+}
+.pointer {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  border-radius: 50%;
+  transform-origin: center;
+  top: calc(50% - 5px);
+}
+.pointer:hover {
+  transform: scale(1.5);
+}
