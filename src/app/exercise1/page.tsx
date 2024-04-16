@@ -11,7 +11,7 @@ export default function Exercise1() {
     minValueRange: 0,
     maxValueRange: 0
   })
-
+  const { minValueRange, maxValueRange } = rangeValues
   useEffect(() => {
     if (data) {
       setRangeValues(prevState => ({
@@ -21,7 +21,7 @@ export default function Exercise1() {
       }))
     }
   }, [data])
-  const { minValueRange, maxValueRange } = rangeValues
+
   return (
     <main className={styles.mainContainer}>
       {isLoading && <span>Loading...</span>}

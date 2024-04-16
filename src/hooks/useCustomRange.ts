@@ -6,6 +6,7 @@ export function useCustomRange(initialMin: number, initialMax: number) {
   const [isEditingMinValue, setEditingMinvalue] = useState(false)
   const [isEditingMaxValue, setEditingMaxValue] = useState(false)
 
+  // preguntar a Marc
   useEffect(() => {
     if (initialMin) setMinValue(initialMin)
   }, [initialMin])
