@@ -1,3 +1,4 @@
+import ReactQueryProvider from '@/providers/ReactQueryProviders'
 import { ubuntuNormal } from '@/libs/fonts'
 import classNames from 'classnames'
 import type { Metadata } from 'next'
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={classNames(ubuntuNormal.className)} suppressHydrationWarning={true}>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   )

@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import { act } from 'react-dom/test-utils'
-import { is } from 'immutable'
+import { useState, useEffect } from 'react'
 
 export function useCustomRange(initialMin: number, initialMax: number) {
   const [minValue, setMinValue] = useState(initialMin)
   const [maxValue, setMaxValue] = useState(initialMax)
   const [isEditingMinValue, setEditingMinvalue] = useState(false)
   const [isEditingMaxValue, setEditingMaxValue] = useState(false)
+
+  useEffect(() => {
+    if (initialMin) setMinValue(initialMin)
+  }, [initialMin])
+
+  useEffect(() => {
+    if (initialMax) setMaxValue(initialMax)
+  }, [initialMax])
+
   const updateValues = (newValue: number, isMinValue: boolean) => {
     if (isMinValue) {
       if (newValue >= initialMin && newValue <= maxValue) {
@@ -21,7 +28,6 @@ export function useCustomRange(initialMin: number, initialMax: number) {
   const handleSlidingValue = (e: React.MouseEvent<HTMLElement>, isMinThumb: boolean) => {
     e.preventDefault()
     const actualThumbPosition = e.currentTarget
-    console.log(actualThumbPosition)
     if (!actualThumbPosition.parentElement) return
 
     const { left, width } = actualThumbPosition.parentElement.getBoundingClientRect()

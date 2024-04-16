@@ -16,6 +16,7 @@ export default function Range({ minValueRange, maxValueRange }: TRange) {
     setEditingMaxValue,
     handleValueSubmit
   } = useCustomRange(minValueRange, maxValueRange)
+
   const { minRangePosition, maxRangePosition } = positionFormatter(minValue, maxValue, minValueRange, maxValueRange)
   const pointerWidth = 15
 
