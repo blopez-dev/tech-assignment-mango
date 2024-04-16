@@ -3,6 +3,7 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  width: 600px;
 }
 .labelValue {
   padding: 5px;
