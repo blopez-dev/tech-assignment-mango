@@ -40,3 +40,15 @@
   justify-content: space-evenly;
   align-items: center;
 }
+.updateValues {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+}
+.updateValues span {
+  display: block;
+  margin: 5px 0;
+  font-size: 12px;
+}

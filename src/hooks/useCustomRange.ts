@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 
-export function useCustomRange(initialMin: number, initialMax: number) {
+export function useCustomRange(initialMin: number, initialMax: number, onChange?: (min: number, max: number) => void) {
   const [minValue, setMinValue] = useState(initialMin)
   const [maxValue, setMaxValue] = useState(initialMax)
   const [isEditingMinValue, setEditingMinvalue] = useState(false)
   const [isEditingMaxValue, setEditingMaxValue] = useState(false)
 
-  // preguntar a Marc
   useEffect(() => {
     if (initialMin) setMinValue(initialMin)
   }, [initialMin])
@@ -19,10 +18,12 @@ export function useCustomRange(initialMin: number, initialMax: number) {
     if (isMinValue) {
       if (newValue >= initialMin && newValue <= maxValue) {
         setMinValue(newValue)
+        onChange && onChange(newValue, maxValue)
       }
     } else {
       if (newValue >= minValue && newValue <= initialMax) {
         setMaxValue(newValue)
+        onChange && onChange(minValue, newValue)
       }
     }
   }
@@ -56,9 +57,11 @@ export function useCustomRange(initialMin: number, initialMax: number) {
     if (isMinValue) {
       if (value >= initialMin && value < maxValue) setMinValue(value)
       setEditingMinvalue(false)
+      onChange && onChange(value, maxValue)
     } else {
       if (value > minValue && value <= initialMax) setMaxValue(value)
       setEditingMaxValue(false)
+      onChange && onChange(minValue, value)
     }
   }
   return {

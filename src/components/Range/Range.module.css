@@ -5,8 +5,21 @@
   align-items: center;
   width: 600px;
 }
+.containerLabels {
+  display: block;
+}
+.editingInput,
 .labelValue {
-  padding: 5px;
+  white-space: nowrap;
+  width: 60px;
+  text-align: right;
+  padding: 0;
+  margin: 0 15px 0 0;
+}
+.editingInput,
+.labelValue &:focus {
+  outline: none;
+  border: 1px solid black;
 }
 .slideRange {
   position: relative;

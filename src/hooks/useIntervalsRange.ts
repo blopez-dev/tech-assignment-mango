@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
-export function useIntervalsRange(minIntervalValue: number, maxIntervalValue: number, allIntervalValues: number[]) {
+export function useIntervalsRange(
+  minIntervalValue: number,
+  maxIntervalValue: number,
+  allIntervalValues: number[],
+  onChange?: (min: number, max: number) => void
+) {
   const [minInterval, setMinInterval] = useState(minIntervalValue)
   const [maxInterval, setMaxInterval] = useState(maxIntervalValue)
 
@@ -12,10 +17,12 @@ export function useIntervalsRange(minIntervalValue: number, maxIntervalValue: nu
     if (isMinValue) {
       if (newValue >= minIntervalValue && newValue <= maxInterval) {
         setMinInterval(newValue)
+        onChange && onChange(newValue, maxInterval)
       }
     } else {
-      if (newValue >= minIntervalValue && newValue <= maxIntervalValue) {
+      if (newValue >= minInterval && newValue <= maxIntervalValue) {
         setMaxInterval(newValue)
+        onChange && onChange(minIntervalValue, newValue)
       }
     }
   }

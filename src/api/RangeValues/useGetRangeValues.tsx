@@ -11,7 +11,7 @@ const useRangeValues = () => {
     queryFn: () => fetchRangesValues()
   })
 }
-// ver con marc si es neceasrio añadir el tipado de Promise
+
 const fetchIntervalsRangeValues = async () => {
   return fetch('https://demo6713668.mockable.io/valueRangeIntervals')
     .then(d => d.json())

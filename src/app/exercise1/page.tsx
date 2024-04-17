@@ -1,29 +1,19 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from '@/ui/home.module.css'
 import Range from '@/components/Range'
 import { useRangeValues } from '@/api/RangeValues/useGetRangeValues'
-import { RangeValues } from '@/api/RangeValues/model'
 import Link from 'next/link'
 import PrimaryButton from '@/components/Button'
 
 export default function Exercise1() {
   const { data, isLoading } = useRangeValues()
-  const [rangeValues, setRangeValues] = useState<RangeValues>({
-    minValueRange: 0,
-    maxValueRange: 0
+  const [currentValue, setCurrentValues] = useState({
+    min: data?.minValueRange || 0,
+    max: data?.maxValueRange || 0
   })
-  const { minValueRange, maxValueRange } = rangeValues
-  useEffect(() => {
-    if (data) {
-      setRangeValues(prevState => ({
-        ...prevState,
-        minValueRange: data.minValueRange,
-        maxValueRange: data.maxValueRange
-      }))
-    }
-  }, [data])
+  const onChange = (min: number, max: number) => setCurrentValues({ min, max })
 
   return (
     <main className={styles.mainContainer}>
@@ -33,7 +23,13 @@ export default function Exercise1() {
         </Link>
       </div>
       {isLoading && <span>Loading...</span>}
-      {!isLoading && data && <Range minValueRange={minValueRange} maxValueRange={maxValueRange} />}
+      {!isLoading && data && (
+        <Range initialMin={data.minValueRange || 0} initialMax={data.maxValueRange || 0} onChange={onChange} />
+      )}
+      <div className={styles.updateValues}>
+        <span>minvalue Selected {currentValue.min}</span>
+        <span>maxValue Selected {currentValue.max}</span>
+      </div>
     </main>
   )
 }
