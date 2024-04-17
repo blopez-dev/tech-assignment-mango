@@ -1,4 +1,5 @@
 export type TRange = {
-  minValueRange: number
-  maxValueRange: number
+  initialMin: number
+  initialMax: number
+  onChange?: (min: number, max: number) => void
 }

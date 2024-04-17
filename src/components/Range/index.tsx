@@ -5,7 +5,7 @@ import { TRange } from '@/types/RangeTypes'
 import { useCustomRange } from '@/hooks/useCustomRange'
 import { positionFormatter } from '@/services/positionFormater'
 
-export default function Range({ minValueRange, maxValueRange }: TRange) {
+export default function Range({ initialMin, initialMax, onChange }: TRange) {
   const {
     minValue,
     maxValue,
@@ -15,30 +15,33 @@ export default function Range({ minValueRange, maxValueRange }: TRange) {
     setEditingMinvalue,
     setEditingMaxValue,
     handleValueSubmit
-  } = useCustomRange(minValueRange, maxValueRange)
+  } = useCustomRange(initialMin, initialMax, onChange)
 
-  const { minRangePosition, maxRangePosition } = positionFormatter(minValue, maxValue, minValueRange, maxValueRange)
+  const { minRangePosition, maxRangePosition } = positionFormatter(minValue, maxValue, initialMin, initialMax)
   const pointerWidth = 15
 
   return (
-    <section className={styles.rangeContainer}>
-      {isEditingMinValue ? (
-        <input
-          type='number'
-          defaultValue={minValue}
-          onBlur={e => handleValueSubmit(e.currentTarget.value, true)}
-          onKeyUp={e => {
-            e.key === 'Enter' ? (e.currentTarget as HTMLInputElement).blur() : null
-          }}
-          onFocus={e => e.target.select()}
-          pattern='[0-9]*'
-          autoFocus
-        />
-      ) : (
-        <label className={styles.labelValue} onClick={() => setEditingMinvalue(true)}>
-          <span>{minValue}</span>
-        </label>
-      )}
+    <section className={styles.rangeContainer} data-testId='rangeComponent'>
+      <div className={styles.containerLabels}>
+        {isEditingMinValue ? (
+          <input
+            type='number'
+            className={styles.editingInput}
+            defaultValue={minValue}
+            onBlur={e => handleValueSubmit(e.currentTarget.value, true)}
+            onKeyUp={e => {
+              e.key === 'Enter' ? (e.currentTarget as HTMLInputElement).blur() : null
+            }}
+            onFocus={e => e.target.select()}
+            pattern='[0-9]*'
+            autoFocus
+          />
+        ) : (
+          <label data-testid='range-min-value' className={styles.labelValue} onClick={() => setEditingMinvalue(true)}>
+            <span>{minValue}</span>
+          </label>
+        )}
+      </div>
       <div className={styles.slideRange}>
         <div className={styles.slideTrack} />
         <div
@@ -56,6 +59,7 @@ export default function Range({ minValueRange, maxValueRange }: TRange) {
       {isEditingMaxValue ? (
         <input
           type='number'
+          className={styles.editingInput}
           defaultValue={maxValue}
           onBlur={e => handleValueSubmit(e.currentTarget.value, false)}
           onKeyUp={e => {
@@ -65,7 +69,7 @@ export default function Range({ minValueRange, maxValueRange }: TRange) {
           autoFocus
         />
       ) : (
-        <label className={styles.labelValue} onClick={() => setEditingMaxValue(true)}>
+        <label data-testid='range-max-value' className={styles.labelValue} onClick={() => setEditingMaxValue(true)}>
           <span>{maxValue}</span>
         </label>
       )}
