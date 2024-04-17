@@ -1,0 +1,53 @@
+.rangeContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+}
+.containerLabels {
+  display: block;
+}
+.editingInput,
+.labelValue {
+  white-space: nowrap;
+  width: 60px;
+  text-align: right;
+  padding: 0;
+  margin: 0 15px 0 0;
+}
+.editingInput,
+.labelValue &:focus {
+  outline: none;
+  border: 1px solid black;
+}
+.slideRange {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  margin: 0 5px;
+}
+.slideTrack {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: rgba(170, 170, 170, 0.47);
+  border-radius: 10px;
+}
+.pointer {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  border-radius: 50%;
+  transform-origin: center;
+  top: calc(50% - 5px);
+}
+.pointer:hover {
+  transform: scale(1.5);
+}
