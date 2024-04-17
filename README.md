@@ -15,6 +15,9 @@ To run the project, follow these steps:
 1. Install the project dependencies by running the command: `npm install`
 2. Start the development server by running the command: `npm run dev`
 3. Open your web browser and navigate to `http://localhost:3000` to view the application.
+4. To consume the services and provide the data to the application I have created two services at https://www.mockable.io/.
+5. The first service for exercise 1 is: https://demo6713668.mockable.io/range
+6. The second service for exercise 2 is: https://demo6713668.mockable.io/valueRangeIntervals
 
 ## How to Test
 
